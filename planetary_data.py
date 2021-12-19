@@ -1,4 +1,4 @@
-# Copyright (c) 2022 Vrund Patel, USA
+# Copyright (c) 2021 Vrund Patel, USA
 #
 # This file contains constsants and enumerations.
 # Data is extracted from Appendix A of "Orbital Mechanics for Engineering Students".
