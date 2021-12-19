@@ -89,7 +89,7 @@ def coe_to_cart(a, e = 0, i = 0, RAAN = 0, argP = 0, theta = 0, u = 0, w = 0, l 
 
 
 
-def cart_to_coe(r_vec, v_vec, mu=398600):
+def cart_to_coe(r_vec, v_vec, mu = pd.earth["mu"]):
     
     r = np.linalg.norm(r_vec)
     v = np.linalg.norm(v_vec)
