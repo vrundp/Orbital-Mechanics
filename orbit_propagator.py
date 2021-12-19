@@ -67,12 +67,3 @@ class OrbitPropagator:
 		dY = np.array([vx,vy,vz,ax,ay,az])
 
 		return dY
-
-
-r_0 = np.array([6667.998, -831.435, -1531.486])
-v_0 = np.array([-1.210185, -7.384715, -1.138699])
-
-orbit1 = OrbitPropagator(r_0,v_0, 0, 86400, 100, J2 = True)
-print(orbit1.propagate())
-
-
