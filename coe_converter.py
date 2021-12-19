@@ -1,4 +1,4 @@
-# Copyright (c) 2022 Vrund Patel, USA
+# Copyright (c) 2021 Vrund Patel, USA
 #
 import numpy as np
 import planetary_data as pd
