@@ -1,5 +1,6 @@
-# Copyright (c) 2021 Vrund Patel, USA
+# Copyright (c) 2022 Vrund Patel, USA
 #
+
 import numpy as np
 import planetary_data as pd
 
@@ -116,6 +117,8 @@ def cart_to_coe(r_vec, v_vec, mu = pd.earth["mu"]):
         n_vec = np.cross([0, 0, 1], h_vec)
         n = np.linalg.norm(n_vec)
         RAAN = np.rad2deg(np.arccos(n_vec[0] / n))
+        if n_vec[1] < 0:
+            RAAN = 360 - RAAN
         
         n_hat = np.dot(1 / n, n_vec)
         u = np.rad2deg(np.arccos(dot(n_hat, r_vec) / r))
@@ -164,8 +167,12 @@ def cart_to_coe(r_vec, v_vec, mu = pd.earth["mu"]):
         n_vec = np.cross([0, 0, 1], h_vec)
         n = np.linalg.norm(n_vec)
         RAAN = np.rad2deg(np.arccos(n_vec[0] / n))
+        if n_vec[1] < 0:
+            RAAN = 360 - RAAN
     
         argP = np.rad2deg(np.arccos(np.dot(n_vec, e_vec) / (n * e)))
+        if e_vec[2] < 0:
+            argP = 360 - argP
     
         theta = np.rad2deg(np.arccos(np.dot(r_vec, e_vec) / (r * e)))
         if np.dot(r_vec, v_vec) < 0:
