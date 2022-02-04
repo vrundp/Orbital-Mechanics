@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import planetary_data as pd
 
 from scipy.integrate import ode
+from mpl_toolkits.mplot3d import Axes3D
 
 class OrbitPropagator:
 
@@ -58,11 +59,15 @@ class OrbitPropagator:
 
 		if self.J2 == True:
 
+			self.CR3BP = False
+
 			ax = (-self.cb["mu"] * rx / r**3) * (1 - self.cb["J2"] * 1.5 * (self.cb["radius"]**2 / r**2) * (5 * (rz**2 / r**2) - 1))
 			ay = (-self.cb["mu"] * ry / r**3) * (1 - self.cb["J2"] * 1.5 * (self.cb["radius"]**2 / r**2) * (5 * (rz**2 / r**2) - 1))
 			az = (-self.cb["mu"] * rz / r**3) * (1 - self.cb["J2"] * 1.5 * (self.cb["radius"]**2 / r**2) * (5 * (rz**2 / r**2) - 3))
 
 		if self.CR3BP == True:
+
+			self.J2 = False
 			
 			mu = self.m2 / (self.m1 + self.m2)
 			r1 = np.sqrt((rx + mu)**2 + ry**2 + rz**2)
@@ -81,5 +86,65 @@ class OrbitPropagator:
 
 		return dY
 
+	def plot(self):
+		
+		pos = np.zeros((len(self.times), 1))
+		for i in range(len(pos)):
+
+			pos[i] = np.sqrt(self.Y[i, 0]**2 + self.Y[i, 1]**2 + self.Y[i, 2]**2)
+
+		posx = np.zeros((len(self.times), 1))
+		for i in range(len(posx)):
+
+			posx[i] = self.Y[i, 0]
+
+		posy = np.zeros((len(self.times), 1))
+		for i in range(len(posy)):
+
+			posy[i] = self.Y[i, 1]
+
+		posz = np.zeros((len(self.times), 1))
+		for i in range(len(posz)):
+
+			posz[i] = self.Y[i, 2]
+
+		vel = np.zeros((len(self.times), 1))
+		for i in range(len(vel)):
+
+			vel[i] = np.sqrt(self.Y[i, 3]**2 + self.Y[i, 4]**2 + self.Y[i, 5]**2)
+
+		acc_vec = np.zeros((len(self.times), 3))
+		for i in range(len(self.times)):
+
+			temp = self.derivFunc(self.times[i], self.Y[i, :])
+			acc_vec[i, :] = temp[3:]
+		
+		acc = np.zeros((len(acc_vec), 1))
+		for i in range(len(acc)):
+
+			acc[i] = np.sqrt(acc_vec[i, 0]**2 + acc_vec[i, 1]**2 + acc_vec[i, 2]**2)
+		
+		energy = np.zeros((len(self.times), 1))
+		for i in range(len(self.times)):
+
+			energy[i] = (vel[i]**2 / 2) - self.cb["mu"] / pos[i]
 
 
+		fig = plt.figure(figsize = (10, 10))
+		ax = fig.add_subplot(111, projection = '3d')
+
+		u = np.linspace(0, 2 * np.pi, 100)
+		v = np.linspace(0, np.pi, 100)
+
+		x = self.cb["radius"] * np.outer(np.cos(u), np.sin(v))
+		y = self.cb["radius"] * np.outer(np.sin(u), np.sin(v))
+		z = self.cb["radius"] * np.outer(np.ones(np.size(u)), np.cos(v))
+
+		ax.plot_surface(x, y, z, color = 'blue', label = self.cb["name"])
+		ax.scatter3D(posx, posy, posz, color = "black", label = "Trajectory")
+		ax.set_xlabel("x position", fontsize = 14)
+		ax.set_ylabel("y position", fontsize = 14)
+		ax.set_zlabel("z position", fontsize = 14)
+
+		plt.show()
+		
