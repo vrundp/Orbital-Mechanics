@@ -4,9 +4,9 @@
 import numpy as np
 
 
-def cal_to_julian(yr, mon, day, hr, min, sec):
+def cal_to_julian(yr, mon, day, hr, mins, sec):
 
-	JD = 367 * yr - int((7 * (yr + int((mon + 9) / 12))) / 4) + int(275 * mon / 9) + day + 1721013.5 + ((hr + (min + (sec / 60)) / 60) / 24)
+	JD = 367 * yr - int((7 * (yr + int((mon + 9) / 12))) / 4) + int(275 * mon / 9) + day + 1721013.5 + ((hr + (mins + (sec / 60)) / 60) / 24)
 
 	return JD
 
