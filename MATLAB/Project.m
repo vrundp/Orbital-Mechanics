@@ -5,7 +5,7 @@
 
 % Vrund Patel
 
-format long g
+format long
 
 %% Constants:
 
