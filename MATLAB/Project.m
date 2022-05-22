@@ -1,4 +1,5 @@
-
+% Copyright (c) 2022 Vrund Patel, USA
+%
 %% ASE 366L: Applied Orbital Mechanics
 % Course Project - SPRING 2022
 
