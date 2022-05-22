@@ -103,7 +103,7 @@ function acc = getDrag(r_vec, v_vec, w_earth, radiusEarth, Cd, AreaMassRatio)
     H = params(3);
     density = rho0 * exp(-(altitude - h0) / H) * 1e9; 
 
-    acc = -0.5 * Cd * AreaMassRatio * density * v_rel* v_rel_vec;
+    acc = -0.5 * Cd * AreaMassRatio * density * v_rel * v_rel_vec;
 
 end
 
