@@ -295,6 +295,7 @@ theta_ERA_0 = 0;
 T = 2 * pi * sqrt(a^3 / MU_EARTH); % period in seconds
 n = 10; % number of orbit periods before flyby
 
+% Algorithm - NASA Technical Note D-233 (1960)
 t_nu1 = TimeFromPerigee(nu1, T, e);
 long2e = long2 + n * w_earth_deg * T;
 
