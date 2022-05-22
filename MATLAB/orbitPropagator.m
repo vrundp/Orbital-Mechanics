@@ -1,3 +1,5 @@
+% Copyright (c) 2022 Vrund Patel, USA
+%
 
 function dY = orbitPropagator(t, Y, MJD_TAI, MU_EARTH, MU_SUN, MU_MOON, J2, J3, radiusEarth, w_earth, Cd, Cr, AreaMassRatio)
 
