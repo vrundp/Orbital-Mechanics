@@ -1,7 +1,6 @@
 # Copyright (c) 2022 Vrund Patel, USA
 
 import numpy as np
-from sklearn.metrics import r2_score
 
 def MinimumEnergyLambertSolver(r1_vec, r2_vec, tm, MU):
 
